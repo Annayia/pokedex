@@ -1,10 +1,25 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
+import { POKEMONS } from "./mock-pokemon";
+import { Pokemon } from "./pokemon";
 
 @Component({
 	selector: "app-root",
-	template: ` <h1>Welcome to {{ title }}!</h1> `,
+	templateUrl: "./app.component.html",
 })
-export class AppComponent {
-	title = "pokedex";
-	pokemons = ["Bulbasaur", "Charmander", "Squirtle"];
+export class AppComponent implements OnInit {
+	title: string = "pokedex";
+	pokemonList: Pokemon[] = POKEMONS;
+	pokemonSelected: Pokemon | undefined;
+	ngOnInit(): void {}
+	selectPokemon(pokemonId: string) {
+		const id = +pokemonId;
+		const pokemon: Pokemon | undefined = this.pokemonList.find(
+			(pokemon) => pokemon.id === +pokemonId
+		);
+		if (pokemon) {
+			this.pokemonSelected = pokemon;
+		} else {
+			this.pokemonSelected = pokemon;
+		}
+	}
 }
